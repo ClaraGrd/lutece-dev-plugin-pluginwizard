@@ -45,7 +45,7 @@ import java.util.Collection;
 public final class ConfigurationKeyHome
 {
     // Static variable pointed at the DAO instance
-    private static IConfigurationKeyDAO _dao = (IConfigurationKeyDAO) SpringContextService.getPluginBean( "pluginwizard", "pluginwizard.configurationKeyDAO" );
+    private static IConfigurationKeyDAO _dao = (IConfigurationKeyDAO) SpringContextService.getBean( "pluginwizard.configurationKeyDAO" );
     private static Plugin _plugin = PluginService.getPlugin( "pluginwizard" );
 
     /**

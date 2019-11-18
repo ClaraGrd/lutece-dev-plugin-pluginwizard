@@ -4,46 +4,53 @@
 <${include} "${admin_feature.featureName?lower_case}_tabs.html" />
 <${macro}tabs2 tab="${business_class.businessClass?lower_case}" />
 <${macro}box>
-	<${macro}boxHeader title='${i18n_open}${plugin_name}.create_${business_class.businessClass?lower_case}.title${i18n_close}' />
-	<${macro}boxBody>
+    <${macro}boxHeader title='${i18n_open}${plugin_name}.create_${business_class.businessClass?lower_case}.title${i18n_close}' />
+    <${macro}boxBody>
     <${macro}tform name='create_${business_class.businessClass?lower_case}' action='jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp'>
 
         <${macro}messages errors=errors />
         <input type="hidden" id="id" name="id"/>
         
         <#list business_class.attributes as attribute>
-				<${macro}formGroup labelKey='${i18n_open}${plugin_name}.create_${business_class.businessClass?lower_case}.label${attribute.name}${i18n_close}' helpKey='${i18n_open}${plugin_name}.create_${business_class.businessClass?lower_case}.label${attribute.name}.help${i18n_close}' <#if attribute.notNull>mandatory=true</#if>>
-					<${macro}input type='text' name='${attribute.paramName}' value='${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}!\'\'${bra_close}' />
-				</${macro}formGroup>
+                <${macro}formGroup labelKey='${i18n_open}${plugin_name}.create_${business_class.businessClass?lower_case}.label${attribute.name}${i18n_close}' helpKey='${i18n_open}${plugin_name}.create_${business_class.businessClass?lower_case}.label${attribute.name}.help${i18n_close}' <#if attribute.notNull>mandatory=true</#if>>
+                    <#if attribute.type == "boolean">
+                    <${macro}input type='text' name='${attribute.paramName}' value='${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}?c${bra_close}' />
+                    <#else>
+                    <${macro}input type='text' name='${attribute.paramName}' value='${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}!\'\'${bra_close}' />
+                    </#if>
+                </${macro}formGroup>
         </#list>
-				
-				<${macro}actionButtons button1Name="action_create${business_class.businessClass}" button2Name="view_manage${business_class.businessClass}"/>
+                <${macro}actionButtons button1Name="action_create${business_class.businessClass}" button2Name="view_manage${business_class.businessClass}"/>
     </${macro}tform>
-	</${macro}boxBody>
+    </${macro}boxBody>
 </${macro}box>
 </#if>  
 <#break>
-	
+
 <#case 1>
 <#if business_class?? >
 <${include} "${admin_feature.featureName?lower_case}_tabs.html" />
 <${macro}tabs2 tab="${business_class.businessClass?lower_case}" />
 
 <${macro}box>
-	<${macro}boxHeader title='${i18n_open}${plugin_name}.modify_${business_class.businessClass?lower_case}.title${i18n_close}' />
-	<${macro}boxBody>
+    <${macro}boxHeader title='${i18n_open}${plugin_name}.modify_${business_class.businessClass?lower_case}.title${i18n_close}' />
+    <${macro}boxBody>
     <${macro}tform class="form-horizontal" method="post" name="modify_${business_class.businessClass?lower_case}" action="jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp">
-			<${macro}messages errors=errors />
-			<input type="hidden" id="id" name="id" value="${bra_open}${business_class.businessClass?lower_case}.id${bra_close}"/>
-			
-			<#list business_class.attributes as attribute>
-				<${macro}formGroup labelKey='${i18n_open}${plugin_name}.modify_${business_class.businessClass?lower_case}.label${attribute.name}${i18n_close}' helpKey='${i18n_open}${plugin_name}.modify_${business_class.businessClass?lower_case}.label${attribute.name}.help${i18n_close}' <#if attribute.notNull>mandatory=true</#if>>
-					<${macro}input type='text' name='${attribute.paramName}' value='${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}${bra_close}' />
-				</${macro}formGroup>
-			</#list>
+            <${macro}messages errors=errors />
+            <input type="hidden" id="id" name="id" value="${bra_open}${business_class.businessClass?lower_case}.id${bra_close}"/>
+
+            <#list business_class.attributes as attribute>
+                <${macro}formGroup labelKey='${i18n_open}${plugin_name}.modify_${business_class.businessClass?lower_case}.label${attribute.name}${i18n_close}' helpKey='${i18n_open}${plugin_name}.modify_${business_class.businessClass?lower_case}.label${attribute.name}.help${i18n_close}' <#if attribute.notNull>mandatory=true</#if>>
+                    <#if attribute.type == "boolean">
+                    <${macro}input type='text' name='${attribute.paramName}' value='${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}?c${bra_close}' />
+                    <#else>
+                    <${macro}input type='text' name='${attribute.paramName}' value='${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}${bra_close}' />
+                    </#if>
+                </${macro}formGroup>
+            </#list>
         <${macro}actionButtons button1Name="action_modify${business_class.businessClass}" button2Name="view_manage${business_class.businessClass}"/>
     </${macro}tform>
-	</${macro}boxBody>
+    </${macro}boxBody>
 </${macro}box>
 </#if>
 <#break>
@@ -54,12 +61,12 @@
 <${macro}tabs2 tab="${business_class.businessClass?lower_case}" />
 
 <${macro}box>
-	<${macro}boxHeader title='${i18n_open}${plugin_name}.manage_${business_class.businessClass?lower_case}.title${i18n_close}' boxTools=true>
-		<${macro}tform class='form-inline pull-right' name='manage_${business_class.businessClass?lower_case}' action='jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp'>
-			<${macro}button type='submit' name='view_create${business_class.businessClass}' buttonIcon='plus' title='${i18n_open}${plugin_name}.manage_${business_class.businessClass?lower_case}s.buttonAdd${i18n_close}' />
-		</${macro}tform>
-	</${macro}boxHeader>
-	<${macro}boxBody>    
+    <${macro}boxHeader title='${i18n_open}${plugin_name}.manage_${business_class.businessClass?lower_case}.title${i18n_close}' boxTools=true>
+        <${macro}tform class='form-inline pull-right' name='manage_${business_class.businessClass?lower_case}' action='jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp'>
+            <${macro}button type='submit' name='view_create${business_class.businessClass}' buttonIcon='plus' title='${i18n_open}${plugin_name}.manage_${business_class.businessClass?lower_case}s.buttonAdd${i18n_close}' />
+        </${macro}tform>
+    </${macro}boxHeader>
+    <${macro}boxBody>
     <${macro}messages infos=infos />
     <${macro}paginationAdmin paginator=paginator combo=1 />
     <div class="clearfix"></div>
@@ -77,13 +84,16 @@
             <input type="hidden" id="id" name="id"/>
             <#list business_class.attributes as attribute>
             <td>
+                <#if attribute.type == "boolean">
+                ${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}?string('true', 'false')${bra_close}
+                <#else>
                 ${bra_open}${business_class.businessClass?lower_case}.${attribute.name?uncap_first}${bra_close}
+                </#if>
             </td>
         </#list>
         <td>
-			<${macro}aButton href='jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp?view=modify${business_class.businessClass}&id=${bra_open}${business_class.businessClass?lower_case?lower_case}.id${bra_close}' title='${i18n_open}portal.util.labelModify${i18n_close}' buttonIcon='pencil' showTitle=false />
-						
-			<${macro}aButton href='jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp?action=confirmRemove${business_class.businessClass}&id=${bra_open}${business_class.businessClass?lower_case?lower_case}.id${bra_close}' title='${i18n_open}portal.util.labelDelete${i18n_close}' buttonIcon='trash' color='btn-danger' showTitle=false />
+            <${macro}aButton href='jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp?view=modify${business_class.businessClass}&id=${bra_open}${business_class.businessClass?lower_case?lower_case}.id${bra_close}' title='${i18n_open}portal.util.labelModify${i18n_close}' buttonIcon='pencil' showTitle=false />
+            <${macro}aButton href='jsp/admin/plugins/${link}/Manage${business_class.businessClass}s.jsp?action=confirmRemove${business_class.businessClass}&id=${bra_open}${business_class.businessClass?lower_case?lower_case}.id${bra_close}' title='${i18n_open}portal.util.labelDelete${i18n_close}' buttonIcon='trash' color='btn-danger' showTitle=false />
 
         </td>
         </tr>
@@ -94,7 +104,7 @@
 
   </${macro}boxBody>
 </${macro}box>
-</#if>  
+</#if>
 <#break>
 <#default>
 </#switch>
